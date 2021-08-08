@@ -27,6 +27,7 @@
                 <li><a href="/account">Home</a></li>
                 <li><a href="account?action=addlibrarian">Add Librarian</a></li>
                 <li><a href="account?action=showlib">View Librarian</a></li>
+                <li><a href="account?action=showuser">View User</a></li>
                 <li><a href="account?action=logout">Logout</a></li>
             </ul>
 

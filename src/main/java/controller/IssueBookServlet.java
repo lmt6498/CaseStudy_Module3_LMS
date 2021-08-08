@@ -1,5 +1,6 @@
 package controller;
 
+import dao.BookDao;
 import modul.IssueBook;
 import service.IssueBookService;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "IssueBookServlet", value = "/issuebook")
 public class IssueBookServlet extends HttpServlet {
@@ -26,7 +28,8 @@ public class IssueBookServlet extends HttpServlet {
         }
         switch (action) {
             case "ViewIssuedBook":
-                request.setAttribute("listIssueBook", issueBookService.listIssueBook);
+                List<IssueBook> list= BookDao.viewIssuedBooks();
+                request.setAttribute("listIssueBook", list);
                 RequestDispatcher requestDis = request.getRequestDispatcher("viewIssuedBook.jsp");
                 requestDis.forward(request, response);
                 break;

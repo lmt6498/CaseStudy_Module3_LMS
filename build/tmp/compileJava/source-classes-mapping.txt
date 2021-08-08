@@ -1,21 +1,27 @@
 dao/LibrarianDao.java
  dao.LibrarianDao
-controller/AccountServlet.java
- controller.AccountServlet
+controller/KhachHangServlet.java
+ controller.KhachHangServlet
 dao/DB.java
  dao.DB
 modul/LibrarianBean.java
  modul.LibrarianBean
-service/KhachHangService.java
- service.KhachHangService
-service/BookService.java
- service.BookService
+modul/IssueBook.java
+ modul.IssueBook
 dao/ManagerKhachHang.java
  dao.ManagerKhachHang
-controller/KhachHangServlet.java
- controller.KhachHangServlet
+service/KhachHangService.java
+ service.KhachHangService
+controller/AccountServlet.java
+ controller.AccountServlet
 modul/Book.java
  modul.Book
+modul/User.java
+ modul.User
+dao/UserDao.java
+ dao.UserDao
+service/BookService.java
+ service.BookService
 dao/BookDao.java
  dao.BookDao
 controller/IssueBookServlet.java
@@ -24,5 +30,3 @@ controller/BookServlet.java
  controller.BookServlet
 service/IssueBookService.java
  service.IssueBookService
-modul/IssueBook.java
- modul.IssueBook

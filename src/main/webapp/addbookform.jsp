@@ -38,6 +38,7 @@
 </nav>
 <div class='container'>
         <h3>Add Book Form</h3>
+    ${messaddbook}
         <form action="/book?action=AddBook" method="post" style="width:300px">
             <div class="form-group">
                 <label for="callno1">Book ID</label>

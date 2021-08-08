@@ -12,19 +12,20 @@ import java.util.List;
 public class ManagerKhachHang {
     static Connection connection= DB.getCon();
 
-    public static List<LibrarianBean> view(){
-        List<LibrarianBean> list=new ArrayList<LibrarianBean>();
+    public static List<Book> view(){
+
+        List<Book> list=new ArrayList<Book>();
         try{
             Connection con=DB.getCon();
             PreparedStatement ps=con.prepareStatement("select * from e_librarian");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                LibrarianBean bean=new LibrarianBean();
-                bean.setId(rs.getInt("id"));
-                bean.setName(rs.getString("name"));
-                bean.setEmail(rs.getString("email"));
-                bean.setPassword(rs.getString("password"));
-                bean.setMobile(rs.getLong("mobile"));
+                Book bean = new Book();
+            bean.setCallno(rs.getString("callno"));
+                 bean.setName(rs.getString("name"));
+               bean.setAuthor(rs.getString("author"));
+                bean.setImage(rs.getString("image"));
+               bean.setQuantity(rs.getInt("quantity"));
                 list.add(bean);
             }
             con.close();

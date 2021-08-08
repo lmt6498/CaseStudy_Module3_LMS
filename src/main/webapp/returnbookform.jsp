@@ -37,6 +37,7 @@
 </nav>
 <div class='container'>
   <h3>Return Book Form</h3>
+  ${messreturn}
   <form action="/book?action=ReturnBook" method="post" style="width:300px">
     <div class="form-group">
       <label for="callno1">Callno</label>

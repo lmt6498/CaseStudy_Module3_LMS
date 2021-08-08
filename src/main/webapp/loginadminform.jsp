@@ -15,16 +15,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/account">eLibrary</a>
+      <a class="navbar-brand" href="account">eLibrary</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/account" class="active">Home</a></li>
+        <li><a href="account" class="active">Home</a></li>
         <li><a href="account?action=admin" class="active">Admin</a></li>
         <li><a href="account?action=librarian">Librarian</a></li>
+        <li><a href="account?action=user" class="active">User</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->

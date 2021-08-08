@@ -90,8 +90,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
                 <li><a href="/book?action=homeKH">Home KH</a></li>
-                <li><a href="/book?action=AddBookForm">Add Book</a></li>
-                <li><a href="/book?action=ViewBook">View Book</a></li>
+                <li><a href="/khachhang">View Book</a></li>
                 <li><a href="/issuebook?action=IssueBookForm">Issue Book</a></li>
                 <li><a href="/issuebook?action=ViewIssuedBook">View Issued Book</a></li>
                 <li><a href="/book?action=ReturnBookForm">Return Book</a></li>
@@ -107,10 +106,9 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container-fluid bg-2 text-center">
-    <h3 class="margin">What Am I?</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. </p>
+    <h3 class="margin">Welcome to Codegym library!!!</h3>
+    <p>Chúc bạn có trải nghiệm tốt tại đây</p>
+    <p>Tìm kiếm sách</p>
     <a href="#" class="btn btn-default btn-lg">
         <span class="glyphicon glyphicon-search"></span> Search
     </a>
@@ -121,14 +119,13 @@
     <div class="row">
         <c:forEach items="${listBookKH}" var="listbookkh" varStatus="loop">
             <div class="col-sm-4">
-                <img src="/image/${listbookkh.image}" class="img-responsive margin" style="width:100%; height: 300px"
+                <img src="images/${listbookkh.image}" class="img-responsive margin" style="width:100%; height: 300px"
                      alt="Image">
                 <h5>${listbookkh.callno}</h5>
                 <h5>${listbookkh.name}</h5>
-                <h5><${listbookkh.author}</h5>
+                <h5>${listbookkh.author}</h5>
                 <h5>${listbookkh.quantity}</h5>
-                <a href="/?action=edit&index=${loop.index}" class="btn btn-warning">Borrow</a>
-                <a href="/?action=addCart&id=${product.id}" class="btn btn-danger">buy</a>
+                <a href="/issuebook?action=IssueBookForm" class="btn btn-warning">Borrow</a>
             </div>
         </c:forEach>
     </div>

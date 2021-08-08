@@ -1,7 +1,9 @@
 package controller;
 
+import dao.UserDao;
 import modul.LibrarianBean;
 import dao.LibrarianDao;
+import modul.User;
 
 
 import javax.servlet.RequestDispatcher;
@@ -34,6 +36,11 @@ public class AccountServlet extends HttpServlet {
             case "addlibrarian":
                 req.getRequestDispatcher("addlibrarianform.jsp").forward(req,resp);
                 break;
+            case "user":
+                req.getRequestDispatcher("loginuser.jsp").forward(req,resp);
+            case "adduser":
+                req.getRequestDispatcher("adduser.jsp").forward(req,resp);
+                break;
             case "deletelib":
                 String sid=req.getParameter("id");
                 int id=Integer.parseInt(sid);
@@ -51,6 +58,11 @@ public class AccountServlet extends HttpServlet {
                 List<LibrarianBean> list=LibrarianDao.view();
                 req.setAttribute("listLib", list);
                 req.getRequestDispatcher("viewlibrarian.jsp").forward(req,resp);
+                break;
+            case "showuser":
+                List<User> list2=UserDao.view();
+                req.setAttribute("listUser", list2);
+                req.getRequestDispatcher("viewuser.jsp").forward(req,resp);
                 break;
             case "logout":
                 req.getSession().invalidate();
@@ -119,6 +131,31 @@ public class AccountServlet extends HttpServlet {
                 String message = "Successfully added librarian";
                 req.setAttribute("messageaddlib", message);
                 req.getRequestDispatcher("addlibrarianform.jsp").forward(req,resp);
+                break;
+            case "adduser":
+                String name4=req.getParameter("name");
+                String email4=req.getParameter("email");
+                String password4=req.getParameter("password");
+                String sphone4=req.getParameter("phone");
+                long phone=Long.parseLong(sphone4);
+                User bean4=new User(name4, email4, password4, phone);
+                UserDao.save(bean4);
+                String message2 = "Register Successfully! Click User for back to Login User Form";
+                req.setAttribute("messageadduserres", message2);
+                req.getRequestDispatcher("adduser.jsp").forward(req,resp);
+                break;
+            case "user":
+                String email5=req.getParameter("email");
+                String password5=req.getParameter("password");
+                if(UserDao.authenticate(email5, password5)){
+                    HttpSession session=req.getSession();
+                    session.setAttribute("user",email5);
+                    req.getRequestDispatcher("homeKH.jsp").forward(req,resp);
+                }else{
+                    String message3 = "Invalid email/password";
+                    req.setAttribute("messageloginuser", message3);
+                }
+                req.getRequestDispatcher("loginuser.jsp").forward(req,resp);
                 break;
             case "editlib":
                 String sid=req.getParameter("id");

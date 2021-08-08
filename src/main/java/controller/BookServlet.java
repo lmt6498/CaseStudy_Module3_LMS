@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "BookServlet", value = "/book")
 public class BookServlet extends HttpServlet {
@@ -27,7 +28,13 @@ public class BookServlet extends HttpServlet {
         }
         switch (action) {
             case "ViewBook":
-                request.setAttribute("listBook", bookService.listBook);
+                List<Book> list= null;
+                try {
+                    list = BookDao.view();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                request.setAttribute("listBook", list);
                 RequestDispatcher requestDis = request.getRequestDispatcher("viewBook.jsp");
                 requestDis.forward(request, response);
                 break;
@@ -38,7 +45,7 @@ public class BookServlet extends HttpServlet {
                 deleteBook(request,response);
                 break;
             case "ReturnBookForm":
-                request.getRequestDispatcher("returnbookform.jsp").include(request, response);
+                request.getRequestDispatcher("returnbookform.jsp").forward(request, response);
                 break;
             case "Edit":
                 showEdit(request,response);
@@ -71,30 +78,25 @@ public class BookServlet extends HttpServlet {
                 String squantity = request.getParameter("quantity");
                 int quantity = Integer.parseInt(squantity);
                 Book book = new Book(callno, name, author,image, publisher, quantity);
-                int i = 0;
-                try {
-                    i = bookService.saveBook(book);
-                    request.setAttribute("listBook", bookService.listBook);
-                    RequestDispatcher requestDis = request.getRequestDispatcher("navlibrarian.jsp");
-                    requestDis.forward(request, response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                int i = BookDao.save(book);
                 if (i > 0) {
-                    out.println("<h3>Book saved successfully</h3>");
+                    String message = "Book saved successfully";
+                    request.setAttribute("messaddbook", message);
                 }
+                request.getRequestDispatcher("addbookform.jsp").forward(request, response);
             case "ReturnBook":
-                PrintWriter outp=response.getWriter();
-                String callnoRB=request.getParameter("callno");
-                int studentid= Integer.parseInt(request.getParameter("studentid"));
-                int x=BookDao.returnBook(callnoRB,studentid);
-                if(x>=1 ){
-                    request.getRequestDispatcher("navlibrarian.jsp").include(request, response);
+                String callno1=request.getParameter("callno");
+                String sstudentid=request.getParameter("studentid");
+                int studentid=Integer.parseInt(sstudentid);
+                int x=BookDao.returnBook(callno1,studentid);
+                if(x>0 ){
+                    String mess1 = "Book returned successfully";
+                    request.setAttribute("messreturn",mess1);
                 }else {
-                    outp.println("<h3>Sorry, unable to return book.</h3><p>We may have sortage of books. Kindly visit later.</p>");
+                    String mess2 = "Sorry, unable to return book. We may have sortage of books. Kindly visit later.";
+                    request.setAttribute("messreturn",mess2);
                 }
+                request.getRequestDispatcher("returnbookform.jsp").forward(request,response);
                 break;
             case "find":
                 findBook(request,response);

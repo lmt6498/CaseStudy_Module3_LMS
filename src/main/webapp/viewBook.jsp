@@ -33,7 +33,6 @@
                 <li><a href="/book?action=ReturnBookForm">Return Book</a></li>
                 <li><a href="account?action=logout">Logout</a></li>
             </ul>
-
         </div><!-- /.navbar-collapse -->
         <div class="search-container">
             <form action="/book?action=find" method="post">
@@ -64,7 +63,7 @@
                     <td>${listbook.callno}</td>
                     <td>${listbook.name}</td>
                     <td>${listbook.author}</td>
-                    <td><img src="/images/${listbook.image}" width="100" height="100"></td>
+                    <td><img src="images/${listbook.image}" width="100" height="100"></td>
                     <td>${listbook.publisher}</td>
                     <td>${listbook.quantity}</td>
                     <td>${listbook.issued}</td>
